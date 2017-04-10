@@ -1,5 +1,10 @@
 package Pantalla;
 
+import Objetos.Notaciones;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 public class Calculadora extends javax.swing.JFrame {
 
     public Calculadora() {
@@ -30,6 +35,7 @@ public class Calculadora extends javax.swing.JFrame {
         BtnSuma = new javax.swing.JButton();
         BtnRestar = new javax.swing.JButton();
         LblResultado = new javax.swing.JLabel();
+        LblShutingYard = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +159,11 @@ public class Calculadora extends javax.swing.JFrame {
         BtnPotencia.setText("^");
         BtnPotencia.setMaximumSize(new java.awt.Dimension(90, 90));
         BtnPotencia.setMinimumSize(new java.awt.Dimension(90, 90));
+        BtnPotencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPotenciaActionPerformed(evt);
+            }
+        });
 
         BtnMultiplicacion.setText("x");
         BtnMultiplicacion.setMaximumSize(new java.awt.Dimension(90, 90));
@@ -166,6 +177,11 @@ public class Calculadora extends javax.swing.JFrame {
         BtnIgual.setText("=");
         BtnIgual.setMaximumSize(new java.awt.Dimension(90, 90));
         BtnIgual.setMinimumSize(new java.awt.Dimension(90, 90));
+        BtnIgual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIgualActionPerformed(evt);
+            }
+        });
 
         BtnDivision.setText("/");
         BtnDivision.setMaximumSize(new java.awt.Dimension(90, 90));
@@ -239,15 +255,18 @@ public class Calculadora extends javax.swing.JFrame {
                             .addComponent(BtnMultiplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnRestar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnSuma, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BtnIgual, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(LblShutingYard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LblShutingYard, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtnDivision, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +307,7 @@ public class Calculadora extends javax.swing.JFrame {
                                 .addComponent(Btn3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BtnPotencia, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,6 +381,20 @@ public class Calculadora extends javax.swing.JFrame {
         LblResultado.setText(LblResultado.getText() + "+");
     }//GEN-LAST:event_BtnSumaActionPerformed
 
+    private void BtnIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIgualActionPerformed
+        Notaciones notaciones = new Notaciones();
+        try {
+            System.out.println(notaciones.convertirPostfija(LblResultado.getText()));
+            JOptionPane.showMessageDialog(Btn0, "El resultado del algoritmo en shunting yard sale en la consola.");
+        } catch (Exception ex) {
+            Logger.getLogger(Notaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnIgualActionPerformed
+
+    private void BtnPotenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPotenciaActionPerformed
+        LblResultado.setText(LblResultado.getText() + "^");
+    }//GEN-LAST:event_BtnPotenciaActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -392,5 +425,6 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton BtnRestar;
     private javax.swing.JButton BtnSuma;
     private javax.swing.JLabel LblResultado;
+    private javax.swing.JLabel LblShutingYard;
     // End of variables declaration//GEN-END:variables
 }
